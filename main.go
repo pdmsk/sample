@@ -13,8 +13,25 @@ type Simple struct {
 	Url         string
 }
 
+type Factory struct {
+	Url string
+}
+
+func SimpleFactory(url string) *Factory {
+	return &Factory{Url: url}
+}
+
+func (f *Factory) GetSimple() *Simple {
+	return &Simple{
+		Name:        "Artsiom",
+		Description: "World",
+		Url:         f.Url,
+	}
+}
+
 func handler(w http.ResponseWriter, r *http.Request) {
-	simple := Simple{"Artsiom", "World", r.Host}
+	factory := SimpleFactory(r.Host)
+	simple := factory.GetSimple()
 
 	jsonOutput, _ := json.Marshal(simple)
 
