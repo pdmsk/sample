@@ -1,7 +1,6 @@
 package main
 
 import (
-    "encoding/json"
     "net/http"
     "net/http/httptest"
     "testing"
@@ -23,7 +22,7 @@ func TestHandler(t *testing.T) {
             status, http.StatusOK)
     }
 
-    expected := `{"Name":"Your Name","Description":"World","Url":"localhost:4444"}`
+    expected := `{"Name":"Artsiom","Description":"World","Url":"localhost:4444"}`
     if rr.Body.String() != expected {
         t.Errorf("handler returned unexpected body: got %v want %v",
             rr.Body.String(), expected)
